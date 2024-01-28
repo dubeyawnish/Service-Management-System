@@ -9,6 +9,7 @@ import { setUserData } from "@/store/slice";
 import { URL } from "@/helper/ApiUrl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Card from "@/components/ui/Card";
 // import Textinput from "@/components/ui/Textinput";
 
 
@@ -86,7 +87,7 @@ const RegisterPage = () => {
   };
   return (
     <section>
-   
+    <Card>
       <div className="">
         <div className="flex items-center justify-center px-4 py-10 ">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
@@ -315,7 +316,7 @@ const RegisterPage = () => {
                 <div>
                   <button
                     type="button"
-                    className={`inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80  ${
+                    className={`inline-flex w-full items-center bg-orange-500 btn btn-dark justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80  ${
                       loading ? "bg-gray-600" : "bg-black"
                     }`}
                     onClick={submitForm}
@@ -328,7 +329,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
-    
+      </Card>
     </section>
   );
 };

@@ -138,7 +138,7 @@ const LoginPage = () => {
                 <div>
                   <button
                     type="button"
-                    className={`inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80  ${
+                    className={`inline-flex w-full items-center justify-center rounded-md  px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80 bg-orange-500 btn btn-dark  ${
                       loading ? "bg-gray-600" : "bg-black"
                     }`}
                     onClick={submitForm}

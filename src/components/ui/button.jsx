@@ -1,47 +1,211 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva } from "class-variance-authority";
+"use client"
+import React from "react";
+import Icon from "@/components/ui/Icon";
 
-import { cn } from "@/lib/utils"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
-  const Comp = asChild ? Slot : "button"
+import Link from "next/link";
+function Button({
+  text,
+  type = "button",
+  isLoading,
+  disabled,
+  className = "bg-primary-500 text-white",
+  children,
+  icon,
+  loadingClass = "unset-classname",
+  iconPosition = "left",
+  iconClass = "text-[20px]",
+  link,
+  onClick,
+  div,
+}) {
   return (
-    (<Comp
-      className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
-      {...props} />)
-  );
-})
-Button.displayName = "Button"
+    <>
+      {!link && !div && (
+        <button
+          type={type}
+          onClick={onClick}
+          className={`btn btn inline-flex justify-center   ${
+            isLoading ? " pointer-events-none" : ""
+          }
+        ${disabled ? " opacity-40 cursor-not-allowed" : ""}
+        ${className}`}
+        >
+          {/* if has children and not loading*/}
+          {children && !isLoading && children}
 
-export { Button, buttonVariants }
+          {/* if no children and  loading*/}
+          {!children && !isLoading && (
+            <span className="flex items-center">
+              {/* if has icon */}
+              {icon && (
+                <span
+                  className={`
+          ${iconPosition === "right" ? "order-1 ltr:ml-2 rtl:mr-2" : " "}
+          ${text && iconPosition === "left" ? "ltr:mr-2 rtl:ml-2" : ""}
+          
+          ${iconClass}
+          
+          `}
+                >
+                  <Icon icon={icon} />
+                </span>
+              )}
+              <span>{text}</span>
+            </span>
+          )}
+
+          {/* if loading*/}
+          {isLoading && (
+            <>
+              <svg
+                className={`animate-spin ltr:-ml-1 ltr:mr-3 rtl:-mr-1 rtl:ml-3 h-5 w-5 ${loadingClass}`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Loading ...
+            </>
+          )}
+        </button>
+      )}
+      {!link && div && (
+        <div
+          onClick={onClick}
+          className={`btn btn inline-flex justify-center   ${
+            isLoading ? " pointer-events-none" : ""
+          }
+        ${disabled ? " opacity-40 cursor-not-allowed" : ""}
+        ${className}`}
+        >
+          {/* if has children and not loading*/}
+          {children && !isLoading && children}
+
+          {/* if no children and  loading*/}
+          {!children && !isLoading && (
+            <span className="flex items-center">
+              {/* if has icon */}
+              {icon && (
+                <span
+                  className={`
+          ${iconPosition === "right" ? "order-1 ltr:ml-2 rtl:mr-2" : " "}
+          ${text && iconPosition === "left" ? "ltr:mr-2 rtl:ml-2" : ""}
+          
+          ${iconClass}
+          
+          `}
+                >
+                  <Icon icon={icon} />
+                </span>
+              )}
+              <span>{text}</span>
+            </span>
+          )}
+
+          {/* if loading*/}
+          {isLoading && (
+            <>
+              <svg
+                className={`animate-spin ltr:-ml-1 ltr:mr-3 rtl:-mr-1 rtl:ml-3 h-5 w-5 ${loadingClass}`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Loading ...
+            </>
+          )}
+        </div>
+      )}
+      {link && !div && (
+        <Link
+          href={link}
+          className={`btn btn inline-flex justify-center   ${
+            isLoading ? " pointer-events-none" : ""
+          }
+        ${disabled ? " opacity-40 cursor-not-allowed" : ""}
+        ${className}`}
+        >
+          {/* if has children and not loading*/}
+          {children && !isLoading && children}
+
+          {/* if no children and  loading*/}
+          {!children && !isLoading && (
+            <span className="flex items-center">
+              {/* if has icon */}
+              {icon && (
+                <span
+                  className={`
+          ${iconPosition === "right" ? "order-1 ltr:ml-2 rtl:mr-2" : " "}
+          ${text && iconPosition === "left" ? "ltr:mr-2 rtl:ml-2" : ""}
+          
+          ${iconClass}
+          
+          `}
+                >
+                  <Icon icon={icon} />
+                </span>
+              )}
+              <span>{text}</span>
+            </span>
+          )}
+
+          {/* if loading*/}
+          {isLoading && (
+            <>
+              <svg
+                className={`animate-spin ltr:-ml-1 ltr:mr-3 rtl:-mr-1 rtl:ml-3 h-5 w-5 ${loadingClass}`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+              Loading ...
+            </>
+          )}
+        </Link>
+      )}
+    </>
+  );
+}
+
+export default Button;

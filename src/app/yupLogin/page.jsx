@@ -4,6 +4,7 @@ import Textinput from "@/components/ui/Textinput";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Icon from "@/components/ui/Icon";
 // import { useNavigate } from "react-router-dom";
 
 
@@ -40,6 +41,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
+     
       <Textinput
         name="email"
         label="email"
@@ -77,10 +79,10 @@ const LoginForm = () => {
       {loading ? (
         <div className="text-center text-keshariya mt-5">
           <div
-            class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
             role="status"
           >
-            <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+            <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
               Loading...
             </span>
           </div>
@@ -88,7 +90,7 @@ const LoginForm = () => {
       ) : (
         ""
       )}
-      <button className="btn btn-dark bg-keshariya block w-full text-center">
+      <button className="btn btn-dark bg-orange-500 text-white block w-full text-center">
         Sign in
       </button>
     </form>
