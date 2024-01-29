@@ -8,6 +8,7 @@ import { toggleActiveChat } from "@/store/slice";
 import { useDispatch } from "react-redux";
 import useMobileMenu from "@/hooks/useMobileMenu";
 import Submenu from "./Submenu";
+import { usePathname } from 'next/navigation'
 
 const Navmenu = ({ menus }) => {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -20,9 +21,10 @@ const Navmenu = ({ menus }) => {
     }
   };
 
-  const router = useRouter();
-  console.log("Router pathname", router.pathname);
-  const locationName = router.pathname?.replace("/", "");
+  const pathname= usePathname();
+  const router=useRouter();
+  // console.log("Router pathname", pathname);
+  const locationName = pathname.replace("/", "");
  
   // const locationName = router.pathname === "/" ? "" : router.pathname?.replace("/", "");
 
@@ -51,7 +53,7 @@ const Navmenu = ({ menus }) => {
     if (mobileMenu) {
       setMobileMenu(false);
     }
-  }, [router.pathname]);
+  }, [pathname]);
 
   return (
     <>
@@ -59,7 +61,7 @@ const Navmenu = ({ menus }) => {
         {menus.map((item, i) => (
           <li
             key={i}
-            className={`single-sidebar-menu 
+            className={`single-sidebar-menu  
               ${item.child ? "item-has-children" : ""}
               ${activeSubmenu === i ? "open" : ""}
               ${locationName === item.link ? "menu-item-active" : ""}`}
@@ -67,10 +69,10 @@ const Navmenu = ({ menus }) => {
             {!item.child && !item.isHeadr && (
               <Link href={item.link} className="menu-link" >
                
-                  <span className="menu-icon flex-grow-0">
+                  <span className="menu-icon flex-grow-0 ">
                     <Icon icon={item.icon} />
                   </span>
-                  <div className="text-box flex-grow">{item.title}</div>
+                  <div className="text-box   flex-grow">{item.title}</div>
                   {item.badge && <span className="menu-badge">{item.badge}</span>}
                
               </Link>
