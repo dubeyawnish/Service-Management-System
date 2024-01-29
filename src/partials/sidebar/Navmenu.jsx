@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Collapse } from "react-collapse";
 import Icon from "@/components/ui/Icon";
-import { toggleActiveChat } from "@/pages/app/chat/store";
+import { toggleActiveChat } from "@/store/slice";
 import { useDispatch } from "react-redux";
 import useMobileMenu from "@/hooks/useMobileMenu";
 import Submenu from "./Submenu";
@@ -21,7 +21,11 @@ const Navmenu = ({ menus }) => {
   };
 
   const router = useRouter();
-  const locationName = router.pathname.replace("/", "");
+  console.log("Router pathname", router.pathname);
+  const locationName = router.pathname?.replace("/", "");
+ 
+  // const locationName = router.pathname === "/" ? "" : router.pathname?.replace("/", "");
+
   const [mobileMenu, setMobileMenu] = useMobileMenu();
   const dispatch = useDispatch();
 
@@ -61,14 +65,14 @@ const Navmenu = ({ menus }) => {
               ${locationName === item.link ? "menu-item-active" : ""}`}
           >
             {!item.child && !item.isHeadr && (
-              <Link href={item.link} passHref>
-                <a className="menu-link">
+              <Link href={item.link} className="menu-link" >
+               
                   <span className="menu-icon flex-grow-0">
                     <Icon icon={item.icon} />
                   </span>
                   <div className="text-box flex-grow">{item.title}</div>
                   {item.badge && <span className="menu-badge">{item.badge}</span>}
-                </a>
+               
               </Link>
             )}
 

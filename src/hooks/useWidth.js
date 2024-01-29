@@ -1,7 +1,7 @@
 "use client"
 import { useState, useMemo } from "react";
 export default function useWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window?.innerWidth);
   // breakpoints
   const breakpoints = {
     sm: "640",

@@ -53,8 +53,12 @@ const LoginPage = () => {
    
       localStorage.setItem("accessToken",res.data.accessToken);
       localStorage.setItem("name",res.data.loggedInUser.name);
-      localStorage.setItem("role",res.data.loggedInUser.role);
-      router.push('/');
+      localStorage.setItem("roles",res.data.loggedInUser.role);
+      setTimeout(() => {
+        if (res.data.loggedInUser.role == "PROVIDER") {
+          router.push("/owner");
+        } 
+      }, 1500);
     } else {
       setLoading(false);
     }

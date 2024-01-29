@@ -40,6 +40,8 @@ const filteredMenuItems = menuItems.filter((menuItem) => {
   return false;
 });
 
+console.log("  FilteredMenu Itme" , filteredMenuItems);
+
 
   
   return (

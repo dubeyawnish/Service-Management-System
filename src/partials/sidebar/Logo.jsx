@@ -10,34 +10,29 @@ import useSkin from "@/hooks/useSkin";
 
 // import images
 // import MobileLogo from "@/assets/images/logo/logo-c.svg";
-import MobileLogo from "../../../assets/img/logo.png";
+import MobileLogo from "@/assets/img/logo.png";
 // import MobileLogoWhite from "@/assets/images/logo/logo-c-white.svg";
-import MobileLogoWhite from "../../../assets/img/logo.png";
-
+import MobileLogoWhite from "@/assets/img/logo.png";
+import Image from 'next/image'
 const SidebarLogo = ({ menuHover }) => {
 
 
 
 
   const role=localStorage.getItem("roles")
-  const firstName=localStorage.getItem("firstName")
+  const firstName=localStorage.getItem("name")
 
 
   const determineUserRoleText = (role) => {
-  if (role === "ROLE_EXHIBITOR") {
-    return "Exhibitor";
-  } else if (role === "ROLE_VISITOR") {
-    return "Visitor";
+  if (role === "PROVIDER") {
+    return "Provider";
+  } else if (role === "CONSUMER") {
+    return "CONSUMER";
   } 
-  else if (role === "ROLE_VOLUNTEER") {
-    return "Volunteer";
-  }
-  else if (role === "ROLE_OWNER") {
-    return "Owner";
-  }
-  else if (role === "ROLE_ADMIN") {
+  else if (role === "ADMIN") {
     return "Admin";
   }
+ 
    else {
     return "Unknown Role"; // You can specify a default value if needed
   }
@@ -65,9 +60,9 @@ const userRoleText = determineUserRoleText(role);
         <div className="flex items-center space-x-4">
           <div className="logo-icon">
             {!isDark && !isSemiDark ? (
-              <img src={MobileLogo} alt="logo" className="h-[40px] w-[40px]" />
+              <Image src={MobileLogo} alt="logo" className="h-[40px] w-[40px]" />
             ) : (
-              <img src={MobileLogoWhite} alt="" />
+              <Image src={MobileLogoWhite} alt="" />
             )}
           </div>
 

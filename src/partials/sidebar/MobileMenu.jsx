@@ -14,10 +14,11 @@ import Icon from "@/components/ui/Icon";
 
 // import images
 // import MobileLogo from "@/assets/images/logo/logo-c.svg";
-import MobileLogo from "../../../assets/img/logo.png";
+import MobileLogo from "@/assets/img/logo.png";
 // import MobileLogoWhite from "@/assets/images/logo/logo-c-white.svg";
-import MobileLogoWhite from "../../../assets/img/logo.png";
+import MobileLogoWhite from "@/assets/img/logo.png";
 import svgRabitImage from "@/assets/images/svg/rabit.svg";
+import Image from 'next/image'
 
 const MobileMenu = ({ className = "custom-class" }) => {
   const scrollableNodeRef = useRef();
@@ -48,22 +49,17 @@ const filteredMenuItems = menuItems.filter((menuItem) => {
 });
 
   const role=localStorage.getItem("roles")
-  const firstName=localStorage.getItem("firstName")
+  const firstName=localStorage.getItem("name")
 const determineUserRoleText = (role) => {
-  if (role === "ROLE_EXHIBITOR") {
-    return "Exhibitor";
-  } else if (role === "ROLE_VISITOR") {
-    return "Visitor";
+  if (role === "PROVIDER") {
+    return "Provider";
+  } else if (role === "CONSUMER") {
+    return "CONSUMER";
   } 
-  else if (role === "ROLE_VOLUNTEER") {
-    return "Volunteer";
-  }
-  else if (role === "ROLE_OWNER") {
-    return "Owner";
-  }
-  else if (role === "ROLE_ADMIN") {
+  else if (role === "ADMIN") {
     return "Admin";
   }
+ 
    else {
     return "Unknown Role"; // You can specify a default value if needed
   }
@@ -78,9 +74,9 @@ const determineUserRoleText = (role) => {
           <div className="flex items-center space-x-4">
             <div className="logo-icon">
               {!isDark && !isSemiDark ? (
-                <img src={MobileLogo} alt="" className="h-[40px] w-[40px]" />
+                <Image src={MobileLogo} alt="" className="h-[40px] w-[40px]" />
               ) : (
-                <img src={MobileLogoWhite} alt="" />
+                <Image src={MobileLogoWhite} alt="" />
               )}
             </div>
             <div>
@@ -115,7 +111,7 @@ const determineUserRoleText = (role) => {
        {/* <Navmenu menus={menuItems} />*/}
         <Navmenu menus={filteredMenuItems} />
         <div className="bg-slate-900 hidden mb-24 lg:mb-10 mt-24 p-4 relative text-center rounded-2xl text-white">
-          <img
+          <Image
             src={svgRabitImage}
             alt=""
             className="mx-auto relative -mt-[73px]"
